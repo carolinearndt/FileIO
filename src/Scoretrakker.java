@@ -6,9 +6,11 @@ import java.util.Scanner;
 
 public class Scoretrakker {
 	private ArrayList <Student> students;
+	private String[] fileNames;
 	public Scoretrakker() {
 		super();
 		students = new ArrayList<Student>();
+		fileNames = new String[] {"scores.txt", "badscore.txt", "nofile.txt"};
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -16,10 +18,18 @@ public class Scoretrakker {
 		FileReader reader = new FileReader(fileName);
 		Scanner scan = new Scanner(reader);
 		
+		String line = "";
+		String score = "";
+		
 		while(scan.hasNextLine()) {
-			String line = scan.nextLine();
-			int score = scan.nextInt();
-			students.add(new Student(line, score));
+			try {
+				line = scan.nextLine();
+				score = scan.nextLine();
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Error: " + line + "has an invalid score: " + score);
+			}
+			students.add(new Student(line, Integer.parseInt(score)));
 		}
 		
 	}
