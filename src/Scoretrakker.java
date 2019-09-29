@@ -28,7 +28,7 @@ public class Scoretrakker {
 				students.add(new Student(line, Integer.parseInt(score)));
 			}
 			catch (NumberFormatException e) {
-				System.out.println("Error: " + line + "has an invalid score: " + score);
+				System.out.println("Error: " + line + " has an invalid score: " + score);
 			}
 			
 		}
@@ -37,21 +37,22 @@ public class Scoretrakker {
 	}
 	
 	public void printInOrder() {
+		System.out.println("Student Score List");
 		Collections.sort(students);
 		for (Student s : students) {
 			System.out.println(s);
 		}
+		System.out.println("\n");
 	}
 	
 	public void processFiles() {
 		for(String fileName: fileNames) {
-			System.out.println("\n File begin \n");
 			try {
 			loadDataFromFile(fileName);
 			printInOrder();
 			}
 			catch(FileNotFoundException e){
-				System.out.println("could not find file");
+				System.out.println("Could not find file. \n");
 			}
 		
 		}
