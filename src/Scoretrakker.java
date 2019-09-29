@@ -22,15 +22,17 @@ public class Scoretrakker {
 		String score = "";
 		
 		while(scan.hasNextLine()) {
+			line = scan.nextLine();
+			score = scan.nextLine();
 			try {
-				line = scan.nextLine();
-				score = scan.nextLine();
+				students.add(new Student(line, Integer.parseInt(score)));
 			}
 			catch (NumberFormatException e) {
 				System.out.println("Error: " + line + "has an invalid score: " + score);
 			}
-			students.add(new Student(line, Integer.parseInt(score)));
+			
 		}
+		scan.close();
 		
 	}
 	
@@ -42,8 +44,17 @@ public class Scoretrakker {
 	}
 	
 	public void processFiles() {
-		loadDataFromFile("scores.txt");
-		printInOrder();
+		for(String fileName: fileNames) {
+			System.out.println("\n File begin \n");
+			try {
+			loadDataFromFile(fileName);
+			printInOrder();
+			}
+			catch(FileNotFoundException e){
+				System.out.println("could not find file");
+			}
+		
+		}
 	}
 
 	public static void main(String[] args) {
